@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.showLogin()
+POST    /                           controllers.Application.login()
+
+GET     /language                   controllers.Application.changeLang(lang)
+
+GET     /registration               controllers.Application.showRegistration()
+POST    /registration               controllers.Application.register()
+
+GET     /jeopardy                   controllers.Application.startJeopardy()
+POST    /jeopardy                   controllers.Application.checkAnswer()
+
+POST    /question                   controllers.Application.chooseQuestion()
+
+GET     /winner                     controllers.Application.showWinner()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
