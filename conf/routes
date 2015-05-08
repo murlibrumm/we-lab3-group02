@@ -4,12 +4,13 @@
 
 # Home page
 GET     /                           controllers.Application.showLogin()
-POST    /                           controllers.Application.login()
+GET     /authentication             controllers.Application.showLogin()
+POST    /authentication             controllers.Application.authenticate()
 
-GET     /language                   controllers.Application.changeLang(lang)
+# GET     /language                   controllers.Application.changeLang(lang)
 
 GET     /registration               controllers.Application.showRegistration()
-POST    /registration               controllers.Application.register()
+POST    /registration               controllers.Application.registration()
 
 GET     /jeopardy                   controllers.Application.startJeopardy()
 POST    /jeopardy                   controllers.Application.checkAnswer()
