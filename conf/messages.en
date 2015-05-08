@@ -33,3 +33,20 @@ playData.username=Username:*
 playData.password=Password:*
 playData.submit=Submit
 playData.required=Fields marked with "*" are required
+
+general.clickLogout=Click here to logout
+general.logout=Logout
+
+winner.winnerDisplay=Business Informatics Group Jeopardy! - Winnerdisplay
+winner.jumpToWinner=Jump to the winnerdisplay
+winner.winnerInfo=Winnerinformations
+winner.playerName=Username
+winner.playerPoints=Playerpoints
+winner.newGame=New game
+
+question.answerQuestion=Business Informatics Group Jeopardy! - Question answering
+question.jumpToQuestionSelect=Jump to the question selection
+question.playerInfo=Playerinformation
+question.leadingPlayer=Leading player
+question.secondPlayer=Second player
+question.timeLeft=Time left:
