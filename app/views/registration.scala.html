@@ -1,4 +1,4 @@
-@(avatars: scala.collection.Map[String, Avatar], form: Form[Player])
+@(form: Form[model.Player])(avatars: scala.collection.Map[String, at.ac.tuwien.big.we15.lab2.api.Avatar])
 @import play.i18n.Messages
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -45,9 +45,9 @@
 		<fieldset>
 			<legend>@Messages.get("persData")</legend>
 
-			@if(form.hasGlobalErrors) {
+			<!-- FIXME @if(form.hasGlobalErrors) {
 			<div role="alert">@form.globalError.message</div>
-			}
+			}  -->
 
 			@helper.inputText(form("firstname"), 
 				'_label -> Messages.get("persData.firstName"))
@@ -56,19 +56,18 @@
 			@helper.inputText(form("birthdate"),
 				'_label -> Messages.get("persData.Birthdate"))
 			<!-- ERROR DATUM -->
-			@helper.select(field = form("gender"), args = 
-				'_label -> Messages.get("persData.sex"), 
+			@helper.select(field = form("gender"), 
+				args = '_label -> Messages.get("persData.sex"), 
 				options = Seq("male"-> Messages.get("persData.sex.male"),
 					"female"-> Messages.get("persData.sex.female")))
 
 		</fieldset>
 		<fieldset>
 			<legend>@Messages.get("playData")</legend>
-			<label for="avatar">Avatar:</label> <select id="avatar" name="avatar">
-				avatars.foreach { case (key: String, value: Avatar) =>
-					<!-- ==========  FIXME ========= --> 
-					<option value="fixme">fixme</option> 
-				}
+			<label for="avatar">@Messages.get("persdata.avatar"):</label> <select id="avatar" name="avatar">
+				<!-- FIXME avatars.foreach { case (key: String, value: Avatar) => 
+					println ("<option value='"key + "'>est</option>")
+				} -->
 			</select> @helper.inputText(form("username"), '_label ->
 			Messages.get("playData.username") , '_showConstraints -> false)
 			<!--ERROR USERNAME -->

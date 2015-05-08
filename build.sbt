@@ -18,6 +18,7 @@ libraryDependencies ++= Seq(
 )
 
 TwirlKeys.templateImports += "scala.collection._"
+
 TwirlKeys.templateImports += "at.ac.tuwien.big.we15.lab2.api._"
 
 fork in run := true

@@ -26,6 +26,7 @@ persData.Birthdate=Birthdate
 persData.sex=Gender
 persData.sex.male=Male
 persData.sex.female=Female
+persdata.avatar=Avatar
 
 playData=Player data
 playData.username=Username:*
