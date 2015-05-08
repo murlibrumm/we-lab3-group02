@@ -1,0 +1,83 @@
+@(form: Form[Player])
+@import play.i18n.Messages
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Business Informatics Group Jeopardy! - Login</title>
+	<link rel="stylesheet" type="text/css"
+		href='@routes.Assets.at("stylesheets/base.css")' />
+	<link rel="stylesheet" type="text/css"
+		href='@routes.Assets.at("stylesheets/screen.css")' />
+</head>
+
+<body id="login-page">
+	<a class="accessibility" href="#login">@Messages.get("auth.body.jumpLogin")</a>
+	<a class="accessibility" title='@Messages.get("auth.clickHere")'
+		href="@routes.Application.showRegistration" accesskey="r">@Messages.get("auth.toTheRegistration")</a>
+	<!-- Header -->
+	<header role="banner" aria-labelledby="bannerheading">
+		<h1 id="bannerheading">
+			<span class="accessibility">Business Informatics Group </span><span
+				class="gametitle">Jeopardy!</span>
+		</h1>
+	</header>
+
+
+
+	<!-- Content -->
+	<!--SPRACHAUSWAHL EVTL VERBESSERN -->
+	<h2 id="langheading" class="accessibility">@Messages.get("auth.language")</h2>
+	<a href="language?lang=de">de</a>
+	<a href="language?lang=en">en</a>
+
+
+	<div role="main">
+
+
+		<section id="login" aria-labelledby="loginheading">
+			<h2 id="loginheading" class="accessibility">@Messages.get("auth.login")</h2>
+
+			<form action="authenticate_player" method="post">
+
+				@if(form.hasGlobalErrors) {
+				<div role="alert">@form.globalError.message</div>
+				}
+
+				<fieldset>
+					<legend id="logindata">@Messages.get("auth.login")</legend>
+					<!--EVTL REQUIRED für PW und Username-->
+					<!--routes.Application.authenticate falsch -->
+					@helper.form(routes.Application.authenticate) {
+					@helper.inputText(form("username"), '_label ->
+						Messages.get("auth.username"), '_showConstraints -> false)
+					@helper.inputPassword(form("password"), '_label ->
+						Messages.get("auth.password"), '_showConstraints -> false)
+					<input
+						name="login" id="loginsubmit" class="greenlink formlink clickable"
+						type="submit" value='@Messages.get("auth.submit")' /> }
+
+				</fieldset>
+			</form>
+		</section>
+
+
+		<!-- Register section -->
+		<section id="registerforward" aria-labelledby="registerheading">
+			<h2 id="registerheading" class="accessibility">@Messages.get("auth.register")</h2>
+			<p id="registerhint">@Messages.get("auth.notRegistered")?</p>
+			<a class="contentlink orangelink"
+				title='@Messages.get("auth.clickHere")'
+				href="@routes.Application.showRegistration" accesskey="r">
+				@Messages.get("auth.toTheRegistration")</a>
+		</section>
+	</div>
+
+
+	<!-- footer -->
+	<footer role="contentinfo">© 2015 BIG Jeopardy</footer>
+</body>
+</html>

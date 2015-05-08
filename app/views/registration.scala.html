@@ -1,0 +1,89 @@
+@(avatars: scala.collection.Map[String, Avatar], form: Form[Player])
+@import play.i18n.Messages
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@Messages.get("reg.title")</title>
+	<link rel="stylesheet" type="text/css"
+		href='@routes.Assets.at("stylesheets/base.css")' />
+	<link rel="stylesheet" type="text/css"
+		href='@routes.Assets.at("stylesheets/screen.css")' />
+</head>
+<body id="register-page">
+	<a title='@Messages.get("reg.jumpToAuth")' class="accessibility"
+		href="#register">@Messages.get("reg.jumpToAuth")</a>
+
+	<!-- Header -->
+	<header role="banner" aria-labelledby="bannerheading">
+		<h1 id="bannerheading">
+			<span class="accessibility">Business Informatics Group </span><span
+				class="gametitle">Jeopardy!</span>
+		</h1>
+	</header>
+
+	<!-- Navigation -->
+	<nav role="navigation" aria-labelledby="navheading">
+		<h2 id="navheading" class="accessibility">Navigation</h2>
+		<ul>
+			<li><a class="orangelink navigationlink" id="loginlink"
+				title='@Messages.get("reg.navigation.auth.Title")'
+				href="@routes.Application.authenticate" accesskey="l">
+				@Messages.get("reg.navigation.auth.Text")
+			</a></li>
+		</ul>
+	</nav>
+
+	<!-- Content -->
+	<div id="register" role="main">
+		<!-- Register section -->
+		<h2 id="registerheading" class="accessibility">@Messages.get("reg.register")</h2>
+		@helper.form(action = routes.Application.registration()) {
+		<fieldset>
+			<legend>@Messages.get("persData")</legend>
+
+			@if(form.hasGlobalErrors) {
+			<div role="alert">@form.globalError.message</div>
+			}
+
+			@helper.inputText(form("firstname"), 
+				'_label -> Messages.get("persData.firstName"))
+			@helper.inputText(form("lastname"),
+				'_label -> Messages.get("persData.lastName")) 
+			@helper.inputText(form("birthdate"),
+				'_label -> Messages.get("persData.Birthdate"))
+			<!-- ERROR DATUM -->
+			@helper.select(field = form("gender"), args = 
+				'_label -> Messages.get("persData.sex"), 
+				options = Seq("male"-> Messages.get("persData.sex.male"),
+					"female"-> Messages.get("persData.sex.female")))
+
+		</fieldset>
+		<fieldset>
+			<legend>@Messages.get("playData")</legend>
+			<label for="avatar">Avatar:</label> <select id="avatar" name="avatar">
+				avatars.foreach { case (key: String, value: Avatar) =>
+					<!-- ==========  FIXME ========= --> 
+					<option value="fixme">fixme</option> 
+				}
+			</select> @helper.inputText(form("username"), '_label ->
+			Messages.get("playData.username") , '_showConstraints -> false)
+			<!--ERROR USERNAME -->
+			@helper.inputText(form("password"), '_label ->
+				Messages.get("playData.password") , '_showConstraints -> false)
+			<!-- ERROR PASSWORD-->
+			<input class="greenlink formlink" type="submit"
+				value='@Messages.get("playData.submit")' accesskey="s" />
+			<p id="requiredhint">@Messages.get("playData.required")</p>
+		</fieldset>
+		}
+	</div>
+
+	<!-- Footer -->
+	<footer role="contentinfo">© 2015 BIG Jeopardy</footer>
+
+</body>
+</html>

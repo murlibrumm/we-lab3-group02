@@ -1,0 +1,34 @@
+auth.body.jumpLogin=Jump to login
+auth.language=Language selection
+
+auth.loginArea=Login
+auth.username=Username
+auth.password=Password
+auth.submit=Submit
+auth.register=Registration
+auth.notRegistered=Not registered
+auth.clickHere=Click here for registration
+auth.toTheRegistration=To the registration
+
+
+reg.title=Business Informatics Group Jeopardy! - Registration
+
+reg.jumpToAuth=Forward to the Authetication
+
+reg.navigation.auth.Title=Click here for login
+reg.navigation.auth.Text=Login
+
+reg.register=Registration
+persData=Personal data
+persData.firstName=Firstname
+persData.lastName=Lastname
+persData.Birthdate=Birthdate
+persData.sex=Gender
+persData.sex.male=Male
+persData.sex.female=Female
+
+playData=Player data
+playData.username=Username:*
+playData.password=Password:*
+playData.submit=Submit
+playData.required=Fields marked with "*" are required
