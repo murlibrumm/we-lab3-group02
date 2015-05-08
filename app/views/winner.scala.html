@@ -1,4 +1,3 @@
-
 @import play.i18n.Messages
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -26,8 +25,8 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-			<!-- link Aendern -->
-				<li><a class="orangelink navigationlink" id="logoutlink" title="@Messages.get('general.clickLogout')" href="login.xhtml" accesskey="l">@Messages.get("general.logout")</a></li>
+			<!-- FIXME link Aendern -->
+				<li><a class="orangelink navigationlink" id="logoutlink" title='@Messages.get("general.clickLogout")' href="login.xhtml" accesskey="l">@Messages.get("general.logout")</a></li>
 			</ul>
 		</nav>
       
@@ -36,7 +35,7 @@
          <section id="gameinfo" aria-labelledby="winnerinfoheading">
             <h2 id="winnerinfoheading" class="accessibility">@Messages.get("winner.winnerInfo")</h2>
            
-            <!-- Messages,alttags etc ändern-->
+            <!-- FIXME Messages, alttags etc ändern-->
             <p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
             <p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
             <section class="playerinfo leader" aria-labelledby="winnerannouncement">
@@ -55,7 +54,7 @@
             </section>
             <section class="playerinfo" aria-labelledby="loserheading">
                <h3 id="loserheading" class="accessibility">Verlierer: Deadpool</h3>
-               <!--Bild + alttag ändern-->
+               <!-- FIXME Bild + alttag ändern-->
                <img class="avatar" src="img/avatar/deadpool_head.png" alt="Spieler-Avatar Deadpool" />
                <table>
                   <tr>
@@ -71,10 +70,10 @@
          </section>
          <section id="newgame" aria-labelledby="newgameheading">
              <h2 id="newgameheading" class="accessibility">@Messages.get("winner.newGame")</h2>
-         	<!--FORM ÄNDERN-->
+         	<!-- FIXME FORM ÄNDERN-->
              <form action="jeopardy.xhtml" method="post">
                	<input class="clickable orangelink contentlink" id="new_game" 
-               	type="submit" name="restart" value="@Messages.get('winner.newGame')" />
+               	type="submit" name="restart" value='@Messages.get("winner.newGame")' />
             </form>
          </section>
       </div>

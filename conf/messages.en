@@ -20,13 +20,13 @@ reg.navigation.auth.Text=Login
 
 reg.register=Registration
 persData=Personal data
-persData.firstName=Firstname
-persData.lastName=Lastname
-persData.Birthdate=Birthdate
-persData.sex=Gender
+persData.firstName=Firstname:
+persData.lastName=Lastname:
+persData.Birthdate=Birthdate:
+persData.sex=Gender:
 persData.sex.male=Male
 persData.sex.female=Female
-persdata.avatar=Avatar
+persdata.avatar=Avatar:
 
 playData=Player data
 playData.username=Username:*

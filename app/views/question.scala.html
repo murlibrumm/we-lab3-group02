@@ -1,5 +1,5 @@
-
 @import play.i18n.Messages
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
@@ -25,8 +25,8 @@
 		<nav role="navigation" aria-labelledby="navheading">
 			<h2 id="navheading" class="accessibility">Navigation</h2>
 			<ul>
-			<!-- Link ändern-->
-				<li><a class="orangelink navigationlink" id="logoutlink" title="@Messages.get('general.clickLogout')" href="login.xhtml" accesskey="l">@Messages.get("general.logout")</a></li>
+			<!-- FIXME Link ändern-->
+				<li><a class="orangelink navigationlink" id="logoutlink" title='@Messages.get("general.clickLogout")' href="login.xhtml" accesskey="l">@Messages.get("general.logout")</a></li>
 			</ul>
 		</nav>
       
@@ -68,7 +68,7 @@
          </section>
             
       <!-- Question -->
-      <!-- Messages fehlen -->
+      <!-- FIXME Messages fehlen -->
       <section id="question" aria-labelledby="questionheading">
             <form id="questionform" action="jeopardy.xhtml" method="get">
                <h2 id="questionheading" class="accessibility">Frage</h2>

@@ -16,6 +16,7 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result showLogin() {
+    	return ok(authentication.render(Form.form(Player.class)));
     }
     
     public static Result showRegistration() {

@@ -49,8 +49,6 @@
 
 				<fieldset>
 					<legend id="logindata">@Messages.get("auth.loginArea")</legend>
-					<!--EVTL REQUIRED für PW und Username-->
-					<!--routes.Application.authenticate falsch -->
 					@helper.inputText(form("username"), '_label ->
 						Messages.get("auth.username"), '_showConstraints -> false)
 					@helper.inputPassword(form("password"), '_label ->
