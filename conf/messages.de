@@ -32,3 +32,21 @@ playData.username=Benutzername:*
 playData.password=Passwort:*
 playData.submit=Registrieren
 playData.required=Mit "*" gekennzeichnete Felder sind Pflichtfelder
+
+
+general.clickLogout=Klicke hier um dich abzumelden
+general.logout=Abmelden
+
+winner.winnerDisplay=Business Informatics Group Jeopardy! - Gewinnanzeige
+winner.jumpToWinner=Zur Gewinnanzeige springen
+winner.winnerInfo=Gewinnerinformationen
+winner.playerName=Spielername
+winner.playerPoints=Spielerpunkte
+winner.newGame=Neues Spiel
+
+question.answerQuestion=Business Informatics Group Jeopardy! - Fragenbeantwortung
+question.jumpToQuestionSelect=Zur Fragenauswahl springen
+question.playerInfo=Spielerinformation
+question.leadingPlayer=Fuehrender Spieler
+question.secondPlayer=Zweiter Spieler
+question.timeLeft=Verbleibende Zeit:
