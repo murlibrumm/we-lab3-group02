@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
+import at.ac.tuwien.big.we15.lab2.api.Avatar;
 import at.ac.tuwien.big.we15.lab2.api.JeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.JeopardyGame;
 import at.ac.tuwien.big.we15.lab2.api.impl.PlayJeopardyFactory;
@@ -14,6 +15,7 @@ import model.User;
 import play.*;
 import play.cache.Cache;
 import play.data.Form;
+import play.data.validation.ValidationError;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.*;
@@ -27,7 +29,7 @@ public class Application extends Controller {
     }
     
     public static Result showRegistration() {
-    	return ok(registration.render(Form.form(User.class), null));
+		return ok(registration.render(Form.form(User.class)));
     }
     
     @Transactional
@@ -54,11 +56,24 @@ public class Application extends Controller {
     public static Result registration() {
     	EntityManager em = JPA.em();
 		Form<User> registrationForm = Form.form(User.class).bindFromRequest();
-		if (registrationForm.hasErrors() || (getUserFromPersistence(registrationForm.data().get("name")) != null )) {
+		if (registrationForm.hasErrors()  || (getUserFromPersistence(registrationForm.data().get("name")) != null )) {
+			/*String errorMsg = "";
+			java.util.Map<String, List<play.data.validation.ValidationError>> errorsAll = registrationForm.errors();
+			for (String field : errorsAll.keySet()) {
+				errorMsg += field + " ";
+				for (ValidationError error : errorsAll.get(field)) {
+					errorMsg += error.message() + ", ";
+				}
+			}
+			System.out.println(errorMsg); */
 			//return badRequest(registration.render(registerForm, Messages.get("registration.error")));
-			return badRequest(registration.render(registrationForm, null));
+			return badRequest(registration.render(registrationForm));
 		} else {
 			User u = registrationForm.get();
+			if(u.getAvatarid() == null){
+				System.out.println("Avatar Id ist null .-.");
+			}
+			u.setAvatar(Avatar.getAvatar(u.getAvatarid()));
 			em.persist(u);
 			return redirect(routes.Application.authenticate());
 		}

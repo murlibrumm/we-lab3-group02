@@ -16,6 +16,8 @@ public class User implements at.ac.tuwien.big.we15.lab2.api.User {
 		male, female
 	}
 
+	private String avatarid;
+
 	private String firstname;
 	
 	private String lastname;
@@ -42,14 +44,15 @@ public class User implements at.ac.tuwien.big.we15.lab2.api.User {
 	}
 	
 	public User (String firstname, String lastname, String birthday, Gender gender, 
-			Avatar avatar, String name, String password) {
+			String avatarid, String name, String password) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.birthday = birthday;
 		this.gender = gender;
-		this.avatar = avatar;
 		this.name = name;
 		this.password = password;
+		this.avatarid = avatarid;
+		this.avatar = Avatar.getAvatar(avatarid);
 	}
 	
 	/*public List<ValidationError> validate() {
@@ -86,11 +89,15 @@ public class User implements at.ac.tuwien.big.we15.lab2.api.User {
 	public Avatar getAvatar() {
 		return avatar;
 	}
+
+	public String getAvatarid(){ return avatarid;}
 	
 	@Override
 	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
 	}
+
+	public void setAvatarid(String avatarid){ this.avatarid = avatarid; }
 
 	/*public Gender getGender() {
 		return gender;
