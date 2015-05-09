@@ -1,11 +1,18 @@
 package controllers;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
-import model.Player;
+import at.ac.tuwien.big.we15.lab2.api.JeopardyFactory;
+import at.ac.tuwien.big.we15.lab2.api.JeopardyGame;
+import at.ac.tuwien.big.we15.lab2.api.impl.PlayJeopardyFactory;
+import at.ac.tuwien.big.we15.lab2.api.impl.SimpleJeopardyGame;
+import model.User;
 import play.*;
+import play.cache.Cache;
 import play.data.Form;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
@@ -16,77 +23,94 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result showLogin() {
-    	return ok(authentication.render(Form.form(Player.class)));
+    	return ok(authentication.render(Form.form(User.class)));
     }
     
     public static Result showRegistration() {
-    	return ok(registration.render(Form.form(Player.class), null));
+    	return ok(registration.render(Form.form(User.class), null));
     }
     
+    @Transactional
     public static Result authenticate() {
-    	return null;
+    	Form<User> authenticationForm = Form.form(User.class).bindFromRequest();
+    	User u = getUserFromPersistence(authenticationForm.data().get("name"));
+		if (authenticationForm.hasErrors() || u == null) {
+			// Wrong Username
+			//return badRequest(registration.render(registerForm, Messages.get("registration.error")));
+			return badRequest(authentication.render(authenticationForm));
+		} else {
+			if (u.getPassword().equals(authenticationForm.data().get("password"))) {
+				// Store Username in Session & start game
+				session("user", authenticationForm.data().get("name"));
+				return redirect(routes.Application.startJeopardy());
+			} else {
+				// Wrong Password
+				return badRequest(authentication.render(authenticationForm));
+			}
+		}
     }
 
+    @Transactional
     public static Result registration() {
-    	/*EntityManager em = JPA.em();
-		Form<Player> registerForm = Form.form(Player.class).bindFromRequest();
-		if (registerForm.hasErrors() || userExists(registerForm.data().get("name"))) {
+    	EntityManager em = JPA.em();
+		Form<User> registrationForm = Form.form(User.class).bindFromRequest();
+		if (registrationForm.hasErrors() || (getUserFromPersistence(registrationForm.data().get("name")) != null )) {
 			//return badRequest(registration.render(registerForm, Messages.get("registration.error")));
-			return badRequest(registration.render(registerForm, null));
+			return badRequest(registration.render(registrationForm, null));
 		} else {
-			Player p = registerForm.get();
-			em.persist(p);
+			User u = registrationForm.get();
+			em.persist(u);
 			return redirect(routes.Application.authenticate());
-		}*/
-    	return ok(index.render("DUMMY registration"));
+		}
     }
     
-    /**
-	 * called by registration(), checks if User exists in Persistence
-	 */
-	private static boolean userExists(String name) {
-		/*EntityManager em = JPA.em();
-		TypedQuery<Player> query = em.createQuery(
-				"SELECT u from User u WHERE u.name = :name", Player.class);
-		try {
-			query.setParameter("name", name).getSingleResult();
-			return true;
-		} catch (NoResultException e) {
-			return false;
-		}*/
-		return false;
+    // called by registration() and authentication(), returns User from Persistence; null if User doesn't exist
+    @Transactional
+	private static User getUserFromPersistence(String name) {
+		EntityManager em = JPA.em();
+		return em.find(User.class, name);
 	}
 
+    @Transactional
     public static Result startJeopardy() {
-    	return ok(index.render("DUMMY startJeopardy"));
+    	JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
+    	EntityManager em = JPA.em();
+    	// Create Game with Username from Session
+    	// TODO Zeile produziert Error, weil User.Avatar == null
+    	JeopardyGame game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
+    	// Store Game in Cache
+    	Cache.set(session().get("user") + "game", game);
+    	return ok(jeopardy.render());
+    	//return redirect(routes.Application.showAllQuestions());
     }
     
-    public static Result checkAnswer() {
-    	return ok(index.render("DUMMY checkAnswer"));
+    public static Result showAllQuestions() {
+    	/*HashMap<>
+    	List<Category> categories = getCategories();
+		for(Category category : categories) 
+			for(Question question : category.getQuestions()) {
+				idToQuestion.put(question.getId(), question);
+				openQuestions.add(question);
+			}
+    	//answerHumanQuestion(List<Integer> answerIds);
+    	JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
+		game.startNewRound();
+		return ok(jeopardy.render());*/
+    	return ok(index.render("DUMMY showAllQuestions"));
     }
+    
+    /*public static Result checkQuestionAnswer() {
+    	return ok(index.render("DUMMY checkAnswer"));
+    }*/
 
-    public static Result chooseQuestion() {
-    	return ok(index.render("DUMMY chooseQuestion"));
+    public static Result showQuestion() {
+    	JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
+    	//game.chooseHumanQuestion(int questionId);
+    	return ok(index.render("DUMMY showQuestion"));
     }
 
     public static Result showWinner() {
     	return ok(index.render("DUMMY showWinner"));
     }
-    
-    /*public static Result newPet() {
-		return ok(petform.render(Form.form(Pet.class)));
-	}
-	
-	@Transactional
-	public static Result createPet() {
-		Form<Pet> form = Form.form(Pet.class).bindFromRequest();
-		if (form.hasErrors()) {
-			return badRequest(petform.render(form));
-		} else {
-			Pet pet = form.get();
-			JPA.em().persist(pet);
-			return redirect(routes.Pets.list());
-		}
-	}*/
 
 }

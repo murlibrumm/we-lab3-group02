@@ -10,7 +10,7 @@ import play.data.validation.ValidationError;
 import at.ac.tuwien.big.we15.lab2.api.Avatar;
 
 @Entity
-public class Player {
+public class User implements at.ac.tuwien.big.we15.lab2.api.User {
 
 	public enum Gender {
 		male, female
@@ -30,25 +30,25 @@ public class Player {
 	@Constraints.Required
 	@Constraints.MinLength(4)
 	@Constraints.MaxLength(8)
-	private String username;
+	private String name;
 	
 	@Constraints.Required
 	@Constraints.MinLength(4)
 	@Constraints.MaxLength(8)
 	private String password;
 
-	public Player() {
+	public User() {
 		
 	}
 	
-	public Player (String firstname, String lastname, String birthday, Gender gender, 
-			Avatar avatar, String username, String password) {
+	public User (String firstname, String lastname, String birthday, Gender gender, 
+			Avatar avatar, String name, String password) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.birthday = birthday;
 		this.gender = gender;
 		this.avatar = avatar;
-		this.username = username;
+		this.name = name;
 		this.password = password;
 	}
 	
@@ -62,18 +62,32 @@ public class Player {
 		return errors;
 	}*/
 
+	@Override
 	public String getName() {
-		return username;
+		return name;
 	}
 
-	public void setName(String username) {
-		this.username = username;
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 	
+	// Getter & Setter must exist for DataBindings
+	//http://stackoverflow.com/questions/16860046/playframework-jsr-303-validated-field-does-not-have-a-corresponding-accessor-f
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	@Override
 	public Avatar getAvatar() {
 		return avatar;
 	}
 	
+	@Override
 	public void setAvatar(Avatar avatar) {
 		this.avatar = avatar;
 	}

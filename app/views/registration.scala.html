@@ -1,4 +1,4 @@
-@(form: Form[model.Player])(avatars: scala.collection.Map[String, at.ac.tuwien.big.we15.lab2.api.Avatar])
+@(form: Form[model.User])(avatars: scala.collection.Map[String, at.ac.tuwien.big.we15.lab2.api.Avatar])
 @import play.i18n.Messages
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -68,10 +68,11 @@
 				<!-- FIXME avatars.foreach { case (key: String, value: Avatar) => 
 					println ("<option value='"key + "'>est</option>")
 				} -->
-			</select> @helper.inputText(form("username"), '_label ->
-			Messages.get("playData.username") , '_showConstraints -> false)
+			</select>
+			@helper.inputText(form("name"), '_label ->
+				Messages.get("playData.name") , '_showConstraints -> false)
 			<!--ERROR USERNAME -->
-			@helper.inputText(form("password"), '_label ->
+			@helper.inputPassword(form("password"), '_label ->
 				Messages.get("playData.password") , '_showConstraints -> false)
 			<!-- ERROR PASSWORD-->
 			<input class="greenlink formlink" type="submit"

@@ -1,8 +1,10 @@
+json.file=data.en.json
+
 auth.body.jumpLogin=Zum Login springen
 auth.language=Sprachauswahl
 
 auth.loginArea=Anmeldung
-auth.username=Benutzername
+auth.name=Benutzername
 auth.password=Passwort
 auth.submit=Absenden
 auth.register=Registrierung
@@ -29,7 +31,7 @@ persData.sex.female=Weiblich
 persdata.avatar=Avatar:
 
 playData=Spielerdaten
-playData.username=Benutzername:*
+playData.name=Benutzername:*
 playData.password=Passwort:*
 playData.submit=Registrieren
 playData.required=Mit "*" gekennzeichnete Felder sind Pflichtfelder

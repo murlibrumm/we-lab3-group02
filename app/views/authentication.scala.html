@@ -1,4 +1,4 @@
-@(form: Form[model.Player])
+@(form: Form[model.User])
 @import play.i18n.Messages
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -49,8 +49,8 @@
 
 				<fieldset>
 					<legend id="logindata">@Messages.get("auth.loginArea")</legend>
-					@helper.inputText(form("username"), '_label ->
-						Messages.get("auth.username"), '_showConstraints -> false)
+					@helper.inputText(form("name"), '_label ->
+						Messages.get("auth.name"), '_showConstraints -> false)
 					@helper.inputPassword(form("password"), '_label ->
 						Messages.get("auth.password"), '_showConstraints -> false)
 					<input
