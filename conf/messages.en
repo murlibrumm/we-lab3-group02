@@ -50,3 +50,11 @@ question.playerInfo=Playerinformation
 question.leadingPlayer=Leading player
 question.secondPlayer=Second player
 question.timeLeft=Time left:
+
+jeopardy.title=Business Informatics Group Jeopardy! - Question selection
+jeopardy.jumpToQuestionSelect=Jump to Question select
+jeopardy.questionSelect=Question select
+jeopardy.category=Category:
+jeopardy.questionSubmit=Submit
+jeopary.lastGameInfo=Info last Game
+jeopardy.lastGame=Last game:

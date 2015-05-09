@@ -38,7 +38,7 @@ public class Application extends Controller {
 			em.persist(p);
 			return redirect(routes.Application.authenticate());
 		}*/
-    	return null;
+    	return ok(index.render("DUMMY registration"));
     }
     
     /**
@@ -58,19 +58,19 @@ public class Application extends Controller {
 	}
 
     public static Result startJeopardy() {
-    	return null;
+    	return ok(index.render("DUMMY startJeopardy"));
     }
     
     public static Result checkAnswer() {
-    	return null;
+    	return ok(index.render("DUMMY checkAnswer"));
     }
 
     public static Result chooseQuestion() {
-    	return null;
+    	return ok(index.render("DUMMY chooseQuestion"));
     }
 
     public static Result showWinner() {
-    	return null;
+    	return ok(index.render("DUMMY showWinner"));
     }
     
     /*public static Result newPet() {

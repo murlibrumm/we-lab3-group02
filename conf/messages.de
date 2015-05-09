@@ -51,3 +51,11 @@ question.playerInfo=Spielerinformation
 question.leadingPlayer=Fuehrender Spieler
 question.secondPlayer=Zweiter Spieler
 question.timeLeft=Verbleibende Zeit:
+
+jeopardy.title=Business Informatics Group Jeopardy! - Fragenauswahl
+jeopardy.jumpToQuestionSelect=Zur Fragenauswahl springen
+jeopardy.questionSelect=Fragenauswahl
+jeopardy.category=Kategorie:
+jeopardy.questionSubmit=waehlen
+jeopary.lastGameInfo=Info zum letztes Spiel
+jeopardy.lastGame=Letztes Spiel:
