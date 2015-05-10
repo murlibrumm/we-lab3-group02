@@ -24,7 +24,7 @@
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">@game.getLeader.getProfit €</td>
+						<td class="playerpoints">@game.getLeader.getProfit â‚¬</td>
 					</tr>
 				</table>
 			</section>
@@ -41,7 +41,7 @@
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">@game.getSecond.getProfit €</td>
+						<td class="playerpoints">@game.getSecond.getProfit â‚¬</td>
 					</tr>
 				</table>
 			</section>
@@ -50,7 +50,6 @@
 		</section>
 
 		<!-- Question -->
-		<!-- FIXME Messages fehlen -->
 		<section id="question" aria-labelledby="questionheading">
 			@helper.form(action = routes.Application.showAllQuestions(), 'id -> "questionform") {
 

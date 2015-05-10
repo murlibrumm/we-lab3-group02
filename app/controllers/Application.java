@@ -95,14 +95,13 @@ public class Application extends Controller {
 	@Transactional
 	@Authenticated(Secured.class)
     public static Result showAllQuestions() {
-
 		JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
 		EntityManager em = JPA.em();
 
 		JeopardyGame game;
-		if(Cache.get(session().get("user") + "game") != null){
+		if(Cache.get(session().get("user") + "game") != null) {
 			game = (JeopardyGame) Cache.get(session().get("user") + "game");
-            if(game.getHumanPlayer().getChosenQuestion() == null){
+            if(game.getHumanPlayer().getChosenQuestion() == null) {
                 return ok(jeopardy.render(game));
             }
 			DynamicForm dynamicForm = Form.form().bindFromRequest();
@@ -115,7 +114,7 @@ public class Application extends Controller {
             game.answerHumanQuestion(selectedA);
 
 
-			if(!game.isGameOver()){
+			if(!game.isGameOver()) {
 				return ok(jeopardy.render(game));
 			} else {
 				return redirect(routes.Application.showWinner());
@@ -154,7 +153,7 @@ public class Application extends Controller {
 
 	@Transactional
 	@Authenticated(Secured.class)
-	public static Result startNewGame(){
+	public static Result startNewGame() {
 		JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
 		EntityManager em = JPA.em();
 
