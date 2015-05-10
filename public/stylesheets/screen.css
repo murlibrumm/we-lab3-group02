@@ -210,7 +210,7 @@ fieldset.inputset {
 }
 
 /* error messages in forms */
-div[role="alert"] {
+div[role="alert"], dl .error {
    clear: both;
    font-weight: bold;
    margin: 0px 0px 1em;

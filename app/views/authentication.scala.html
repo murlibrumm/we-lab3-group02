@@ -37,10 +37,6 @@
 
 			@helper.form(action = routes.Application.authenticate()) {
 
-				<!-- FIXME @if(form.hasGlobalErrors) {
-				<div role="alert">@form.globalError.message</div>
-				} -->
-
 				<fieldset>
 					<legend id="logindata">@Messages.get("auth.loginArea")</legend>
 					@helper.inputText(form("name"), '_label ->

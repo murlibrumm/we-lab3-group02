@@ -44,18 +44,24 @@ public class Application extends Controller {
     public static Result authenticate() {
     	Form<User> authenticationForm = Form.form(User.class).bindFromRequest();
     	User u = getUserFromPersistence(authenticationForm.data().get("name"));
-		if (authenticationForm.hasErrors() || u == null) {
-			// Wrong Username
+		if (authenticationForm.hasErrors()) {
 			return badRequest(authentication.render(authenticationForm));
+		}
+		if (u == null) {
+			// Wrong Username
+			authenticationForm.reject("name", "user already exists");
+			return badRequest(authentication.render(authenticationForm));
+		}
+		
+		// Check Password
+		if (u.getPassword().equals(authenticationForm.data().get("password"))) {
+			// Store Username in Session & start game
+			session("user", authenticationForm.data().get("name"));
+			return redirect(routes.Application.showAllQuestions());
 		} else {
-			if (u.getPassword().equals(authenticationForm.data().get("password"))) {
-				// Store Username in Session & start game
-				session("user", authenticationForm.data().get("name"));
-				return redirect(routes.Application.showAllQuestions());
-			} else {
-				// Wrong Password
-				return badRequest(authentication.render(authenticationForm));
-			}
+			// Wrong Password
+			authenticationForm.reject("password", "wrong password");
+			return badRequest(authentication.render(authenticationForm));
 		}
     }
 
@@ -63,14 +69,20 @@ public class Application extends Controller {
     public static Result registration() {
     	EntityManager em = JPA.em();
 		Form<User> registrationForm = Form.form(User.class).bindFromRequest();
-		if (registrationForm.hasErrors()  || (getUserFromPersistence(registrationForm.data().get("name")) != null )) {
+		if (registrationForm.hasErrors()) {
 			return badRequest(registration.render(registrationForm));
-		} else {
-			User u = registrationForm.get();
-			u.setAvatar(Avatar.getAvatar(u.getAvatarid()));
-			em.persist(u);
-			return redirect(routes.Application.authenticate());
+		} 
+		if (getUserFromPersistence(registrationForm.data().get("name")) != null) {
+			// Username already taken
+			registrationForm.reject("name", "a user with the username already exists");
+			return badRequest(registration.render(registrationForm));
 		}
+		
+		// no Errors
+		User u = registrationForm.get();
+		u.setAvatar(Avatar.getAvatar(u.getAvatarid()));
+		em.persist(u);
+		return redirect(routes.Application.authenticate());
     }
     
     // called by registration() and authentication(), returns User from Persistence; null if User doesn't exist

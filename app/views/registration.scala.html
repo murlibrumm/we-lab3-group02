@@ -42,13 +42,11 @@
 	<div id="register" role="main">
 		<!-- Register section -->
 		<h2 id="registerheading" class="accessibility">@Messages.get("reg.register")</h2>
+		
 		@helper.form(action = routes.Application.registration()) {
+		
 		<fieldset>
 			<legend>@Messages.get("persData")</legend>
-
-			<!-- FIXME @if(form.hasGlobalErrors) {
-			<div role="alert">@form.globalError.message</div>
-			}  -->
 
 			@helper.inputText(form("firstname"), 
 				'_label -> Messages.get("persData.firstName"))
@@ -56,7 +54,6 @@
 				'_label -> Messages.get("persData.lastName")) 
 			@helper.inputText(form("birthdate"),
 				'_label -> Messages.get("persData.Birthdate"))
-			<!-- ERROR DATUM -->
 			@helper.select(field = form("gender"), 
 				args = '_label -> Messages.get("persData.sex"), 
 				options = Seq("male"-> Messages.get("persData.sex.male"),
@@ -65,6 +62,7 @@
 		</fieldset>
 		<fieldset>
 			<legend>@Messages.get("playData")</legend>
+			
 			<label for="avatarid">@Messages.get("persdata.avatar")</label>
 			<select id="avatarid" name="avatarid">
 				@for(a <- Avatar.values()) {
@@ -73,13 +71,13 @@
             </select>
 			@helper.inputText(form("name"), '_label ->
 				Messages.get("playData.name") , '_showConstraints -> false)
-			<!--ERROR USERNAME -->
 			@helper.inputPassword(form("password"), '_label ->
 				Messages.get("playData.password") , '_showConstraints -> false)
-			<!-- ERROR PASSWORD-->
+				
 			<input class="greenlink formlink" type="submit"
 				value='@Messages.get("playData.submit")' accesskey="s" />
 			<p id="requiredhint">@Messages.get("playData.required")</p>
+			
 		</fieldset>
 		}
 	</div>
