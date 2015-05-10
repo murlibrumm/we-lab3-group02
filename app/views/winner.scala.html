@@ -14,20 +14,20 @@
 			@if(game.getHumanPlayer.getLatestProfitChange != null) {
 				@if(game.getHumanPlayer.getLatestProfitChange != null && game.getHumanPlayer.getLatestProfitChange < 0) {
 					<p class="user-info negative-change">
-						@Messages.get("jeopardy.playerFalse") @game.getHumanPlayer.getLatestProfitChange €</p>
+						@Messages.get("jeopardy.playerFalse") @game.getHumanPlayer.getLatestProfitChange &euro;</p>
 				} else {
 					<p class="user-info positive-change">
-						@Messages.get("jeopardy.playerCorrect") @game.getHumanPlayer.getLatestProfitChange €</p>
+						@Messages.get("jeopardy.playerCorrect") @game.getHumanPlayer.getLatestProfitChange &euro;</p>
 				}
 			}
 
 			@if(game.getMarvinPlayer.getLatestProfitChange != null) {
 				@if(game.getMarvinPlayer.getLatestProfitChange != null && game.getMarvinPlayer.getLatestProfitChange < 0) {
 					<p class="user-info negative-change"> @game.getMarvinPlayer.getUser.getName
-						@Messages.get("jeopardy.computerFalse") @game.getMarvinPlayer.getLatestProfitChange €</p>
+						@Messages.get("jeopardy.computerFalse") @game.getMarvinPlayer.getLatestProfitChange &euro;</p>
 				} else {
 					<p class="user-info positive-change"> @game.getMarvinPlayer.getUser.getName
-						@Messages.get("jeopardy.computerCorrect") @game.getMarvinPlayer.getLatestProfitChange €</p>
+						@Messages.get("jeopardy.computerCorrect") @game.getMarvinPlayer.getLatestProfitChange &euro;</p>
 				}
 			}
 
@@ -49,7 +49,7 @@
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">€ @game.getWinner.getProfit </td>
+						<td class="playerpoints">&euro; @game.getWinner.getProfit </td>
 					</tr>
 				</table>
 			</section>
@@ -64,7 +64,7 @@
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">€ @game.getLoser.getProfit </td>
+						<td class="playerpoints">&euro; @game.getLoser.getProfit </td>
 					</tr>
 				</table>
 			</section>
