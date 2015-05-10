@@ -10,7 +10,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import at.ac.tuwien.big.we15.lab2.api.*;
-import at.ac.tuwien.big.we15.lab2.api.QuestionDataProvider;
 import at.ac.tuwien.big.we15.lab2.api.impl.PlayJeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleJeopardyGame;
 import model.User;
@@ -22,6 +21,7 @@ import play.data.validation.ValidationError;
 import play.db.jpa.JPA;
 import play.db.jpa.Transactional;
 import play.mvc.*;
+import play.mvc.Security.Authenticated;
 import play.i18n.Messages;
 import views.html.*;
 
@@ -91,27 +91,8 @@ public class Application extends Controller {
 		return em.find(User.class, name);
 	}
 
-	/*
-    @Transactional
-    public static Result startJeopardy() {
-    	JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
-    	EntityManager em = JPA.em();
-
-		JeopardyGame game;
-		if(Cache.get(session().get("user")+"game") != null){
-			game = (JeopardyGame) Cache.get(session().get("user")+"game");
-		} else {
-			// Create Game with Username from Session
-			game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
-			// Store Game in Cache
-			Cache.set(session().get("user") + "game", game);
-		}
-
-		return redirect(routes.Application.showAllQuestions());
-    }
-	**/
-
 	@Transactional
+	@Authenticated(Secured.class)
     public static Result showAllQuestions() {
 
 		JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
@@ -150,6 +131,7 @@ public class Application extends Controller {
 		}
     }
 
+	@Authenticated(Secured.class)
     public static Result showQuestion() {
     	JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
 
@@ -160,7 +142,8 @@ public class Application extends Controller {
 		}
 		return ok(question.render(game));
     }
-
+    
+    @Authenticated(Secured.class)
     public static Result showWinner() {
 		JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
 		Cache.remove(session().get("user") + "game");
@@ -168,6 +151,7 @@ public class Application extends Controller {
     }
 
 	@Transactional
+	@Authenticated(Secured.class)
 	public static Result startNewGame(){
 		JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
 		EntityManager em = JPA.em();
