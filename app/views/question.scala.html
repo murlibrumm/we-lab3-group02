@@ -31,7 +31,7 @@
 		<ul>
 			<!-- FIXME Link ändern-->
 			<li><a class="orangelink navigationlink" id="logoutlink"
-				title='@Messages.get("general.clickLogout")' href="login.xhtml"
+				title='@Messages.get("general.clickLogout")' href="@routes.Application.authenticate"
 				accesskey="l">@Messages.get("general.logout")</a></li>
 		</ul>
 	</nav>
@@ -74,7 +74,7 @@
 					</tr>
 				</table>
 			</section>
-			<p id="round">Frage: {game.getHumanPlayer.getAnsweredQuestions.size()+game.getMarvinPlayer.getAnsweredQuestions.size()} / 10</p>
+			<p id="round">Frage: @{game.getHumanPlayer.getAnsweredQuestions.size()+game.getMarvinPlayer.getAnsweredQuestions.size()} / 10</p>
 		</section>
 
 		<!-- Question -->

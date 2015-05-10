@@ -30,7 +30,7 @@
 		<ul>
 			<!-- FIXME link Aendern -->
 			<li><a class="orangelink navigationlink" id="logoutlink"
-				title='@Messages.get("general.clickLogout")' href="login.xhtml"
+				title='@Messages.get("general.clickLogout")' href="@routes.Application.authenticate"
 				accesskey="l">@Messages.get("general.logout")</a></li>
 		</ul>
 	</nav>
@@ -46,7 +46,7 @@
 			<section class="playerinfo leader"
 				aria-labelledby="winnerannouncement">
 				<h3 id="winnerannouncement">Gewinner: @game.getWinner.getUser.getName </h3>
-				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getWinner.getUser.getAvatar.getImageHead)
+				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getWinner.getUser.getAvatar.getImageFull)
 					alt=@game.getWinner.getUser.getName />
 				<table>
 					<tr>
@@ -62,7 +62,7 @@
 			<section class="playerinfo" aria-labelledby="loserheading">
 				<h3 id="loserheading" class="accessibility">Verlierer: @game.getLoser.getUser.getName</h3>
 				<!-- FIXME Bild + alttag ändern-->
-				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getLoser.getUser.getAvatar.getImageHead)
+				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getLoser.getUser.getAvatar.getImageFull)
 					alt=@game.getLoser.getUser.getName />
 				<table>
 					<tr>

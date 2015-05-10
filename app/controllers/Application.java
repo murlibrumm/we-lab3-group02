@@ -118,15 +118,18 @@ public class Application extends Controller {
 			if(!game.isGameOver()){
 				DynamicForm dynamicForm = Form.form().bindFromRequest();
 				List<Integer> selectedA = dynamicForm.data().keySet().stream().filter(s -> s.startsWith("selection")).map(s -> Integer.valueOf(dynamicForm.get(s))).collect(Collectors.toList());
-				game.answerHumanQuestion(selectedA);
-				return ok(jeopardy.render(game));
+				if (selectedA.isEmpty()) {
+					return ok(jeopardy.render(game));
+				} else {
+					game.answerHumanQuestion(selectedA);
+					return ok(jeopardy.render(game));
+				}
 			} else {
 				return redirect(routes.Application.showWinner());
 			}
 		} else {
 			// Create Game with Username from Session
 			game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
-
 
 			// Store in Cache
 			Cache.set(session().get("user") + "game", game);
@@ -147,10 +150,14 @@ public class Application extends Controller {
     	JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
 
 		DynamicForm dynamicForm = Form.form().bindFromRequest();
-		int selected = Integer.valueOf(dynamicForm.get("question_selection"));
-		game.chooseHumanQuestion(selected);
+		if(dynamicForm.get("question_selection") != null) {
+			int selected = Integer.valueOf(dynamicForm.get("question_selection"));
+			game.chooseHumanQuestion(selected);
 
-    	return ok(question.render(game));
+			return ok(question.render(game));
+		} else {
+			return ok(jeopardy.render(game));
+		}
     }
 
     public static Result showWinner() {
