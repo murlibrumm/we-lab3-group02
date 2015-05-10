@@ -10,8 +10,8 @@ POST    /authentication             controllers.Application.authenticate()
 GET     /registration               controllers.Application.showRegistration()
 POST    /registration               controllers.Application.registration()
 
-GET     /jeopardy                   controllers.Application.startJeopardy()
-POST    /jeopardy                   controllers.Application.showAllQuestions()
+#GET     /jeopardy                   controllers.Application.startJeopardy()
+GET    /jeopardy                   controllers.Application.showAllQuestions()
 
 POST    /showQuestion               controllers.Application.showQuestion()
 

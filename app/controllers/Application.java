@@ -1,19 +1,21 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
-import at.ac.tuwien.big.we15.lab2.api.Avatar;
-import at.ac.tuwien.big.we15.lab2.api.JeopardyFactory;
-import at.ac.tuwien.big.we15.lab2.api.JeopardyGame;
+import at.ac.tuwien.big.we15.lab2.api.*;
+import at.ac.tuwien.big.we15.lab2.api.QuestionDataProvider;
 import at.ac.tuwien.big.we15.lab2.api.impl.PlayJeopardyFactory;
 import at.ac.tuwien.big.we15.lab2.api.impl.SimpleJeopardyGame;
 import model.User;
 import play.*;
 import play.cache.Cache;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.data.validation.ValidationError;
 import play.db.jpa.JPA;
@@ -44,7 +46,7 @@ public class Application extends Controller {
 			if (u.getPassword().equals(authenticationForm.data().get("password"))) {
 				// Store Username in Session & start game
 				session("user", authenticationForm.data().get("name"));
-				return redirect(routes.Application.startJeopardy());
+				return redirect(routes.Application.showAllQuestions());
 			} else {
 				// Wrong Password
 				return badRequest(authentication.render(authenticationForm));
@@ -70,9 +72,6 @@ public class Application extends Controller {
 			return badRequest(registration.render(registrationForm));
 		} else {
 			User u = registrationForm.get();
-			if(u.getAvatarid() == null){
-				System.out.println("Avatar Id ist null .-.");
-			}
 			u.setAvatar(Avatar.getAvatar(u.getAvatarid()));
 			em.persist(u);
 			return redirect(routes.Application.authenticate());
@@ -86,32 +85,62 @@ public class Application extends Controller {
 		return em.find(User.class, name);
 	}
 
+	/*
     @Transactional
     public static Result startJeopardy() {
     	JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
     	EntityManager em = JPA.em();
-    	// Create Game with Username from Session
-    	// TODO Zeile produziert Error, weil User.Avatar == null
-    	JeopardyGame game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
-    	// Store Game in Cache
-    	Cache.set(session().get("user") + "game", game);
-    	return ok(jeopardy.render());
-    	//return redirect(routes.Application.showAllQuestions());
+
+		JeopardyGame game;
+		if(Cache.get(session().get("user")+"game") != null){
+			game = (JeopardyGame) Cache.get(session().get("user")+"game");
+		} else {
+			// Create Game with Username from Session
+			game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
+			// Store Game in Cache
+			Cache.set(session().get("user") + "game", game);
+		}
+
+		return redirect(routes.Application.showAllQuestions());
     }
-    
+	**/
+
+	@Transactional
     public static Result showAllQuestions() {
-    	/*HashMap<>
-    	List<Category> categories = getCategories();
-		for(Category category : categories) 
+
+		JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
+		EntityManager em = JPA.em();
+
+		JeopardyGame game;
+		HashMap<Integer, Question> idToQuestion;
+		List<Question> openQuestions;
+		if(Cache.get(session().get("user")+"game") != null){
+			game = (JeopardyGame) Cache.get(session().get("user")+"game");
+			idToQuestion = (HashMap) Cache.get(session().get("idToQuestion"));
+			openQuestions = (List) Cache.get(session().get("openQuestions"));
+		} else {
+			// Create Game with Username from Session
+			idToQuestion = new HashMap<>();
+			openQuestions = new ArrayList<>();
+			game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
+			// Store in Cache
+			Cache.set(session().get("user") + "game", game);
+			Cache.set("idToQuestion", idToQuestion);
+			Cache.set("openQuestions", openQuestions);
+		}
+
+    	List<Category> categories = game.getCategories();
+		for(Category category : categories)
 			for(Question question : category.getQuestions()) {
 				idToQuestion.put(question.getId(), question);
 				openQuestions.add(question);
 			}
+
     	//answerHumanQuestion(List<Integer> answerIds);
-    	JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
-		game.startNewRound();
-		return ok(jeopardy.render());*/
-    	return ok(index.render("DUMMY showAllQuestions"));
+    	//JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
+		//game.startNewRound();
+		//return ok(jeopardy.render());
+    	return ok(jeopardy.render(game));
     }
     
     /*public static Result checkQuestionAnswer() {
@@ -120,8 +149,12 @@ public class Application extends Controller {
 
     public static Result showQuestion() {
     	JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
-    	//game.chooseHumanQuestion(int questionId);
-    	return ok(index.render("DUMMY showQuestion"));
+
+		DynamicForm dynamicForm = Form.form().bindFromRequest();
+		int selected = Integer.valueOf(dynamicForm.get("question_selection"));
+		game.chooseHumanQuestion(selected);
+
+    	return ok(question.render(game));
     }
 
     public static Result showWinner() {
