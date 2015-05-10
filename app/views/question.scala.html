@@ -2,45 +2,15 @@
 @import at.ac.tuwien.big.we15.lab2.api.JeopardyGame
 @import play.i18n.Messages
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Business Informatics Group Jeopardy! - Fragenbeantwortung</title>
-	<link rel="stylesheet" type="text/css"
-		href='@routes.Assets.at("stylesheets/base.css")' />
-	<link rel="stylesheet" type="text/css"
-		href='@routes.Assets.at("stylesheets/screen.css")' />
-	<script src='@routes.Assets.at("javascripts/jquery.js")' type="text/javascript"></script>
-    <script src='@routes.Assets.at("javascripts/framework.js")' type="text/javascript"></script>
-</head>
-<body id="question-page">
+@main(true, Messages.get("question.title"), "question-page") {
+	
 	<a class="accessibility" href="#questions">Zur Fragenauswahl
 		springen</a>
-	<!-- Header -->
-	<header role="banner" aria-labelledby="bannerheading">
-		<h1 id="bannerheading">
-			<span class="accessibility">Business Informatics Group </span><span
-				class="gametitle">Jeopardy!</span>
-		</h1>
-	</header>
-
-	<!-- Navigation -->
-	<nav role="navigation" aria-labelledby="navheading">
-		<h2 id="navheading" class="accessibility">Navigation</h2>
-		<ul>
-			<li><a class="orangelink navigationlink" id="logoutlink"
-				title='@Messages.get("general.clickLogout")' href="@routes.Application.authenticate"
-				accesskey="l">@Messages.get("general.logout")</a></li>
-		</ul>
-	</nav>
 
 	<!-- Content -->
 	<div role="main">
 		<!-- info -->
-		<section id="gameinfo" aria-labelledby="gameinfoinfoheading">
+		<section id="gameinfo" aria-labelledby="gameinfoinfoheading"> 
 			<h2 id="gameinfoinfoheading" class="accessibility">@Messages.get("question.playerInfo")</h2>
 			<section id="firstplayer" class="playerinfo leader"
 				aria-labelledby="firstplayerheading">
@@ -54,7 +24,7 @@
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">@game.getLeader.getProfit â‚¬</td>
+						<td class="playerpoints">@game.getLeader.getProfit €</td>
 					</tr>
 				</table>
 			</section>
@@ -71,7 +41,7 @@
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">@game.getSecond.getProfit â‚¬</td>
+						<td class="playerpoints">@game.getSecond.getProfit €</td>
 					</tr>
 				</table>
 			</section>
@@ -153,8 +123,4 @@
         //]]>
     </script>
 
-	<!-- footer -->
-	<footer role="contentinfo">Â© 2015 BIG Jeopardy!</footer>
-
-</body>
-</html>
+}

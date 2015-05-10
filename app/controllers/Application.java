@@ -49,7 +49,7 @@ public class Application extends Controller {
 		}
 		if (u == null) {
 			// Wrong Username
-			authenticationForm.reject("name", "user already exists");
+			authenticationForm.reject("name", "user doesn't exist");
 			return badRequest(authentication.render(authenticationForm));
 		}
 		

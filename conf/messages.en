@@ -1,5 +1,14 @@
 json.file=data.en.json
 
+
+general.clickLogout=Click here to logout
+general.logout=Logout
+general.big=Business Informatics Group
+general.jeopardy=Jeopardy!
+general.footer=© 2015 BIG Jeopardy
+
+
+auth.title=Login
 auth.body.jumpLogin=Jump to login
 auth.language=Language selection
 auth.loginArea=Login
@@ -11,12 +20,13 @@ auth.notRegistered=Not registered
 auth.clickHere=Click here for registration
 auth.toTheRegistration=To the registration
 
+
 reg.title=Business Informatics Group Jeopardy! - Registration
 reg.jumpToAuth=Forward to the Authetication
 reg.navigation.auth.Title=Click here for login
 reg.navigation.auth.Text=Login
-
 reg.register=Registration
+
 persData=Personal data
 persData.firstName=Firstname:
 persData.lastName=Lastname:
@@ -32,26 +42,8 @@ playData.password=Password:*
 playData.submit=Submit
 playData.required=Fields marked with "*" are required
 
-general.clickLogout=Click here to logout
-general.logout=Logout
 
-winner.winnerDisplay=Business Informatics Group Jeopardy! - Winnerdisplay
-winner.jumpToWinner=Jump to the winnerdisplay
-winner.winnerInfo=Winnerinformations
-winner.playerName=Username
-winner.playerPoints=Playerpoints
-winner.newGame=New game
-
-question.answerQuestion=Business Informatics Group Jeopardy! - Question answering
-question.jumpToQuestionSelect=Jump to the question selection
-question.playerInfo=Playerinformation
-question.leadingPlayer=Leading player
-question.secondPlayer=Second player
-question.timeLeft=Time left:
-question.for=for €
-question.answer=answer
-
-jeopardy.title=Business Informatics Group Jeopardy! - Question selection
+jeopardy.title=Question selection
 jeopardy.jumpToQuestionSelect=Jump to Question select
 jeopardy.questionSelect=Question select
 jeopardy.category=Category:
@@ -66,3 +58,23 @@ jeopardy.computerFalse=has answered incorrectly:
 jeopardy.computerChoose1=has chosen
 jeopardy.computerChoose2=for €
 jeopardy.computerChoose3=.
+
+
+question.answerQuestion=Question answering
+question.jumpToQuestionSelect=Jump to the question selection
+question.playerInfo=Playerinformation
+question.leadingPlayer=Leading player
+question.secondPlayer=Second player
+question.timeLeft=Time left:
+question.for=for €
+question.answer=answer
+
+
+winner.winnerDisplay=Winnerdisplay
+winner.winner=Winner:
+winner.loser=Loser:
+winner.jumpToWinner=Jump to the winnerdisplay
+winner.winnerInfo=Winnerinformations
+winner.playerName=Username
+winner.playerPoints=Playerpoints
+winner.newGame=New game

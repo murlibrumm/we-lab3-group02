@@ -1,32 +1,11 @@
 @(form: Form[model.User])
 @import play.i18n.Messages
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Business Informatics Group Jeopardy! - Login</title>
-	<link rel="stylesheet" type="text/css"
-		href='@routes.Assets.at("stylesheets/base.css")' />
-	<link rel="stylesheet" type="text/css"
-		href='@routes.Assets.at("stylesheets/screen.css")' />
-</head>
+@main(false, Messages.get("auth.title"), "login-page") {
 
-<body id="login-page">
 	<a class="accessibility" href="#login">@Messages.get("auth.body.jumpLogin")</a>
 	<a class="accessibility" title='@Messages.get("auth.clickHere")'
 		href="@routes.Application.showRegistration" accesskey="r">@Messages.get("auth.toTheRegistration")</a>
-	<!-- Header -->
-	<header role="banner" aria-labelledby="bannerheading">
-		<h1 id="bannerheading">
-			<span class="accessibility">Business Informatics Group </span><span
-				class="gametitle">Jeopardy!</span>
-		</h1>
-	</header>
-
-
 
 	<!-- Content -->
 
@@ -39,6 +18,7 @@
 
 				<fieldset>
 					<legend id="logindata">@Messages.get("auth.loginArea")</legend>
+					
 					@helper.inputText(form("name"), '_label ->
 						Messages.get("auth.name"), '_showConstraints -> false)
 					@helper.inputPassword(form("password"), '_label ->
@@ -55,7 +35,6 @@
 			<a href="language?lang=en"><img src='@routes.Assets.at("images/gb.png")' /></a>
 		</section>
 
-
 		<!-- Register section -->
 		<section id="registerforward" aria-labelledby="registerheading">
 			<h2 id="registerheading" class="accessibility">@Messages.get("auth.register")</h2>
@@ -66,9 +45,4 @@
 				@Messages.get("auth.toTheRegistration")</a>
 		</section>
 	</div>
-
-
-	<!-- footer -->
-	<footer role="contentinfo">© 2015 BIG Jeopardy</footer>
-</body>
-</html>
+}

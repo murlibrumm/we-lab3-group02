@@ -1,5 +1,14 @@
 json.file=data.de.json
 
+
+general.clickLogout=Klicke hier um dich abzumelden
+general.logout=Abmelden
+general.big=Business Informatics Group
+general.jeopardy=Jeopardy!
+general.footer=© 2015 BIG Jeopardy
+
+
+auth.title=Login
 auth.body.jumpLogin=Zum Login springen
 auth.language=Sprachauswahl
 auth.loginArea=Anmeldung
@@ -11,7 +20,8 @@ auth.notRegistered=Nicht registriert
 auth.clickHere=Hier klicken um dich zu registrieren
 auth.toTheRegistration=Zur Registrierung
 
-reg.title=Business Informatics Group Jeopardy! - Registrieren
+
+reg.title=Registrieren
 reg.jumpToAuth=Zur Registrierung springen
 reg.navigation.auth.Title=Klicke hier um dich anzumelden
 reg.navigation.auth.Text=Anmelden
@@ -32,26 +42,8 @@ playData.password=Passwort:*
 playData.submit=Registrieren
 playData.required=Mit "*" gekennzeichnete Felder sind Pflichtfelder
 
-general.clickLogout=Klicke hier um dich abzumelden
-general.logout=Abmelden
 
-winner.winnerDisplay=Business Informatics Group Jeopardy! - Gewinnanzeige
-winner.jumpToWinner=Zur Gewinnanzeige springen
-winner.winnerInfo=Gewinnerinformationen
-winner.playerName=Spielername
-winner.playerPoints=Spielerpunkte
-winner.newGame=Neues Spiel
-
-question.answerQuestion=Business Informatics Group Jeopardy! - Fragenbeantwortung
-question.jumpToQuestionSelect=Zur Fragenauswahl springen
-question.playerInfo=Spielerinformation
-question.leadingPlayer=Fuehrender Spieler
-question.secondPlayer=Zweiter Spieler
-question.timeLeft=Verbleibende Zeit:
-question.for=für €
-question.answer=antworten
-
-jeopardy.title=Business Informatics Group Jeopardy! - Fragenauswahl
+jeopardy.title=Fragenauswahl
 jeopardy.jumpToQuestionSelect=Zur Fragenauswahl springen
 jeopardy.questionSelect=Fragenauswahl
 jeopardy.category=Kategorie:
@@ -66,3 +58,23 @@ jeopardy.computerFalse=hat falsch geantwortet:
 jeopardy.computerChoose1=hat
 jeopardy.computerChoose2=für €
 jeopardy.computerChoose3=gewählt
+
+
+question.title=Fragenbeantwortung
+question.jumpToQuestionSelect=Zur Fragenauswahl springen
+question.playerInfo=Spielerinformation
+question.leadingPlayer=Fuehrender Spieler
+question.secondPlayer=Zweiter Spieler
+question.timeLeft=Verbleibende Zeit:
+question.for=für €
+question.answer=antworten
+
+
+winner.title=Gewinnanzeige
+winner.winner=Gewinner:
+winner.loser=Verlierer:
+winner.jumpToWinner=Zur Gewinnanzeige springen
+winner.winnerInfo=Gewinnerinformationen
+winner.playerName=Spielername
+winner.playerPoints=Spielerpunkte
+winner.newGame=Neues Spiel
