@@ -19,6 +19,8 @@ auth.register=Registrierung
 auth.notRegistered=Nicht registriert
 auth.clickHere=Hier klicken um dich zu registrieren
 auth.toTheRegistration=Zur Registrierung
+auth.switchToGerman=Sprache: Zu Deutsch wechseln
+auth.switchToEnglish=Sprache: Zu Englisch wechseln
 
 
 reg.title=Registrieren

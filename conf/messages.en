@@ -19,6 +19,8 @@ auth.register=Registration
 auth.notRegistered=Not registered
 auth.clickHere=Click here for registration
 auth.toTheRegistration=To the registration
+auth.switchToGerman=Language: Switch to German
+auth.switchToEnglish=Language: Switch to English
 
 
 reg.title=Business Informatics Group Jeopardy! - Registration

@@ -40,8 +40,8 @@
 			<section class="playerinfo leader"
 				aria-labelledby="winnerannouncement">
 				<h3 id="winnerannouncement">@Messages.get("winner.winner") @game.getWinner.getUser.getName </h3>
-				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getWinner.getUser.getAvatar.getImageFull)
-					alt=@game.getWinner.getUser.getName />
+				<img class="avatar" src='@routes.Assets.at("images/avatar/"+game.getWinner.getUser.getAvatar.getImageFull)'
+					alt='@game.getWinner.getUser.getName' />
 				<table>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerName")</th>
@@ -55,8 +55,8 @@
 			</section>
 			<section class="playerinfo" aria-labelledby="loserheading">
 				<h3 id="loserheading" class="accessibility">@Messages.get("winner.loser") @game.getLoser.getUser.getName</h3>
-				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getLoser.getUser.getAvatar.getImageFull)
-					alt=@game.getLoser.getUser.getName />
+				<img class="avatar" src='@routes.Assets.at("images/avatar/"+game.getLoser.getUser.getAvatar.getImageFull)'
+					alt='@game.getLoser.getUser.getName' />
 				<table>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerName")</th>

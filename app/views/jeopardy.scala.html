@@ -14,8 +14,8 @@
 			<section id="firstplayer" class="playerinfo leader"
 				aria-labelledby="firstplayerheading">
 				<h3 id="firstplayerheading" class="accessibility">@Messages.get("question.leadingPlayer")</h3>
-				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getLeader.getUser.getAvatar.getImageHead)
-					alt=@game.getLeader.getUser.getName />
+				<img class="avatar" src='@routes.Assets.at("images/avatar/"+game.getLeader.getUser.getAvatar.getImageHead)'
+					alt='@game.getLeader.getUser.getName' />
 				<table>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerName")</th>
@@ -30,8 +30,8 @@
 			<section id="secondplayer" class="playerinfo"
 				aria-labelledby="secondplayerheading">
 				<h3 id="secondplayerheading" class="accessibility">@Messages.get("question.secondPlayer")</h3>
-				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getSecond.getUser.getAvatar.getImageHead)
-					alt=@game.getSecond.getUser.getName />
+				<img class="avatar" src='@routes.Assets.at("images/avatar/"+game.getSecond.getUser.getAvatar.getImageHead)'
+					alt='@game.getSecond.getUser.getName' />
 				<table>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerName")</th>
@@ -82,15 +82,16 @@
 					<legend class="accessibility">@Messages.get("jeopardy.questionSelect")</legend>
 
 					@for(category <- game.getCategories) {
-						<section class="questioncategory" aria-labelledby="@category.getName()heading">
-							<h3 id="@category.getName()" class="tile category-title">
+						<section class="questioncategory" aria-labelledby='@category.getName().replace(" ", "")heading'>
+							<h3 id='@category.getName().replace(" ", "")heading' class="tile category-title">
 								<span class="accessibility">@Messages.get("jeopardy.category")</span> @category.getName()
 							</h3>
 							<ol class="category_questions">
 							@for(question <- category.getQuestions) {
 								<li><input @{
 									if(game.hasBeenChosen(question)) "disabled=\"disabled\""
-								} name="question_selection" id="question_@question.getId" value="@question.getId" type="radio" /> <label class="tile clickable" for="question_@question.getId">€ @{
+								} name="question_selection" id="question_@question.getId" value="@question.getId" type="radio" /> 
+								<label class="tile clickable" for="question_@question.getId">€ @{
 									question.getValue()
 								}</label>
 								</li>
