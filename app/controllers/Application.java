@@ -46,7 +46,6 @@ public class Application extends Controller {
     	User u = getUserFromPersistence(authenticationForm.data().get("name"));
 		if (authenticationForm.hasErrors() || u == null) {
 			// Wrong Username
-			//return badRequest(registration.render(registerForm, Messages.get("registration.error")));
 			return badRequest(authentication.render(authenticationForm));
 		} else {
 			if (u.getPassword().equals(authenticationForm.data().get("password"))) {
@@ -65,16 +64,6 @@ public class Application extends Controller {
     	EntityManager em = JPA.em();
 		Form<User> registrationForm = Form.form(User.class).bindFromRequest();
 		if (registrationForm.hasErrors()  || (getUserFromPersistence(registrationForm.data().get("name")) != null )) {
-			/*String errorMsg = "";
-			java.util.Map<String, List<play.data.validation.ValidationError>> errorsAll = registrationForm.errors();
-			for (String field : errorsAll.keySet()) {
-				errorMsg += field + " ";
-				for (ValidationError error : errorsAll.get(field)) {
-					errorMsg += error.message() + ", ";
-				}
-			}
-			System.out.println(errorMsg); */
-			//return badRequest(registration.render(registerForm, Messages.get("registration.error")));
 			return badRequest(registration.render(registrationForm));
 		} else {
 			User u = registrationForm.get();
@@ -101,19 +90,18 @@ public class Application extends Controller {
 		JeopardyGame game;
 		if(Cache.get(session().get("user") + "game") != null){
 			game = (JeopardyGame) Cache.get(session().get("user") + "game");
-			/*if(game.getHumanPlayer().getAnsweredQuestions().size() + 
-					game.getMarvinPlayer().getAnsweredQuestions().size() >= 10){
-				return redirect(routes.Application.showWinner());
-			}*/
+            if(game.getHumanPlayer().getChosenQuestion() == null){
+                return ok(jeopardy.render(game));
+            }
 			DynamicForm dynamicForm = Form.form().bindFromRequest();
 			List<Integer> selectedA = dynamicForm.data().keySet().stream().filter
 					(s -> s.startsWith("selection")).map
 					(s -> Integer.valueOf(dynamicForm.get(s))).collect(Collectors.toList());
 			if (selectedA.isEmpty()) {
-				return ok(jeopardy.render(game));
-			} else { 
-				game.answerHumanQuestion(selectedA);
+				selectedA.add(0);
 			}
+            game.answerHumanQuestion(selectedA);
+
 
 			if(!game.isGameOver()){
 				return ok(jeopardy.render(game));
@@ -139,8 +127,10 @@ public class Application extends Controller {
 		if(dynamicForm.get("question_selection") != null) {
 			int selected = Integer.valueOf(dynamicForm.get("question_selection"));
 			game.chooseHumanQuestion(selected);
+			return ok(question.render(game));
+		} else {
+			return ok(jeopardy.render(game));
 		}
-		return ok(question.render(game));
     }
     
     @Authenticated(Secured.class)
