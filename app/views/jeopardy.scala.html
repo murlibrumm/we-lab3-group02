@@ -58,7 +58,7 @@
 			<section id="secondplayer" class="playerinfo"
 				aria-labelledby="secondplayerheading">
 				<h3 id="secondplayerheading" class="accessibility">@Messages.get("question.secondPlayer")</h3>
-				<!--FIXME alt tag in messages -->
+				<!--FIXME alt tag in messages - Vede: wo sind hier messages?? -->
 				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getSecond.getUser.getAvatar.getImageHead)
 					alt=@game.getSecond.getUser.getName />
 				<table>
@@ -80,9 +80,29 @@
 
 		<section id="question-selection" aria-labelledby="questionheading">
 			<h2 id="questionheading" class="black accessibility">Jeopardy</h2>
-			<p class="user-info positive-change">Du hast richtig geantwortet: +1000 €</p>
-			<p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
-			<p class="user-info">Deadpool hat TUWIEN für € 1000 gewählt.</p>
+
+			@if(game.getHumanPlayer.getLatestProfitChange != null) {
+				@if(game.getHumanPlayer.getLatestProfitChange != null && game.getHumanPlayer.getLatestProfitChange < 0) {
+					<p class="user-info negative-change">
+						Du hast falsch geantwortet: @game.getHumanPlayer.getLatestProfitChange €</p>
+				} else {
+					<p class="user-info positive-change">Du hast richtig geantwortet: @game.getHumanPlayer.getLatestProfitChange €</p>
+				}
+			}
+
+			@if(game.getMarvinPlayer.getLatestProfitChange != null) {
+				@if(game.getMarvinPlayer.getLatestProfitChange != null && game.getMarvinPlayer.getLatestProfitChange < 0) {
+					<p class="user-info negative-change"> @game.getMarvinPlayer.getUser.getName
+						hat falsch geantwortet: @game.getMarvinPlayer.getLatestProfitChange €</p>
+				} else {
+					<p class="user-info positive-change"> @game.getMarvinPlayer.getUser.getName
+						hat richtig geantwortet: @game.getMarvinPlayer.getLatestProfitChange €</p>
+				}
+			}
+
+			@if(game.getMarvinPlayer.getChosenQuestion != null) {
+				<p class="user-info">@game.getMarvinPlayer.getUser.getName hat @game.getMarvinPlayer.getChosenQuestion.getCategory.getName für € @game.getMarvinPlayer.getChosenQuestion.getValue gewählt.</p>
+			}
 			@helper.form(action = routes.Application.showQuestion()) {
 				<fieldset>
 					<legend class="accessibility">@Messages.get("jeopardy.questionSelect")</legend>

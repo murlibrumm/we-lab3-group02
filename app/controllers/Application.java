@@ -115,15 +115,18 @@ public class Application extends Controller {
 		JeopardyGame game;
 		if(Cache.get(session().get("user")+"game") != null){
 			game = (JeopardyGame) Cache.get(session().get("user")+"game");
+			if(game.getHumanPlayer().getAnsweredQuestions().size() + game.getMarvinPlayer().getAnsweredQuestions().size() >= 10){
+				return redirect(routes.Application.showWinner());
+			}
+			DynamicForm dynamicForm = Form.form().bindFromRequest();
+			List<Integer> selectedA = dynamicForm.data().keySet().stream().filter(s -> s.startsWith("selection")).map(s -> Integer.valueOf(dynamicForm.get(s))).collect(Collectors.toList());
+			if (selectedA.isEmpty()) {
+				return ok(jeopardy.render(game));
+			} else { game.answerHumanQuestion(selectedA); }
+
+
 			if(!game.isGameOver()){
-				DynamicForm dynamicForm = Form.form().bindFromRequest();
-				List<Integer> selectedA = dynamicForm.data().keySet().stream().filter(s -> s.startsWith("selection")).map(s -> Integer.valueOf(dynamicForm.get(s))).collect(Collectors.toList());
-				if (selectedA.isEmpty()) {
 					return ok(jeopardy.render(game));
-				} else {
-					game.answerHumanQuestion(selectedA);
-					return ok(jeopardy.render(game));
-				}
 			} else {
 				return redirect(routes.Application.showWinner());
 			}
