@@ -1,3 +1,5 @@
+@(game: JeopardyGame)
+@import at.ac.tuwien.big.we15.lab2.api.JeopardyGame
 @import play.i18n.Messages
 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -43,33 +45,33 @@
 			<p class="user-info negative-change">Deadpool hat falsch geantwortet: -500 €</p>
 			<section class="playerinfo leader"
 				aria-labelledby="winnerannouncement">
-				<h3 id="winnerannouncement">Gewinner: Black Widow</h3>
-				<img class="avatar" src="img/avatar/black-widow.png"
-					alt="Spieler-Avatar Black Widow" />
+				<h3 id="winnerannouncement">Gewinner: @game.getWinner.getUser.getName </h3>
+				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getWinner.getUser.getAvatar.getImageHead)
+					alt=@game.getWinner.getUser.getName />
 				<table>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerName")</th>
-						<td class="playername">Black Widow</td>
+						<td class="playername">@game.getWinner.getUser.getName</td>
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">€ 2000</td>
+						<td class="playerpoints">€ @game.getWinner.getProfit </td>
 					</tr>
 				</table>
 			</section>
 			<section class="playerinfo" aria-labelledby="loserheading">
-				<h3 id="loserheading" class="accessibility">Verlierer: Deadpool</h3>
+				<h3 id="loserheading" class="accessibility">Verlierer: @game.getLoser.getUser.getName</h3>
 				<!-- FIXME Bild + alttag ändern-->
-				<img class="avatar" src="img/avatar/deadpool_head.png"
-					alt="Spieler-Avatar Deadpool" />
+				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getLoser.getUser.getAvatar.getImageHead)
+					alt=@game.getLoser.getUser.getName />
 				<table>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerName")</th>
-						<td class="playername">Deadpool</td>
+						<td class="playername">@game.getLoser.getUser.getName </td>
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">€ 400</td>
+						<td class="playerpoints">€ @game.getLoser.getProfit </td>
 					</tr>
 				</table>
 			</section>

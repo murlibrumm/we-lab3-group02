@@ -44,16 +44,16 @@
 			<section id="firstplayer" class="playerinfo leader"
 				aria-labelledby="firstplayerheading">
 				<h3 id="firstplayerheading" class="accessibility">@Messages.get("question.leadingPlayer")</h3>
-				<img class="avatar" src="img/avatar/black-widow_head.png"
-					alt="Spieler-Avatar Black Widow" />
+				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getLeader.getUser.getAvatar.getImageHead)
+					alt=@game.getLeader.getUser.getName />
 				<table>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerName")</th>
-						<td class="playername">Black Widow (Du)</td>
+						<td class="playername">@game.getLeader.getUser.getName</td>
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">2000 €</td>
+						<td class="playerpoints">@game.getLeader.getProfit €</td>
 					</tr>
 				</table>
 			</section>
@@ -61,20 +61,20 @@
 				aria-labelledby="secondplayerheading">
 
 				<h3 id="secondplayerheading" class="accessibility">@Messages.get("question.secondPlayer")</h3>
-				<img class="avatar" src="img/avatar/deadpool_head.png"
-					alt="Spieler-Avatar Deadpool" />
+				<img class="avatar" src=@routes.Assets.at("images/avatar/"+game.getSecond.getUser.getAvatar.getImageHead)
+					alt=@game.getSecond.getUser.getName />
 				<table>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerName")</th>
-						<td class="playername">Deadpool</td>
+						<td class="playername">@game.getSecond.getUser.getName </td>
 					</tr>
 					<tr>
 						<th class="accessibility">@Messages.get("winner.playerPoints")</th>
-						<td class="playerpoints">400 €</td>
+						<td class="playerpoints">@game.getSecond.getProfit €</td>
 					</tr>
 				</table>
 			</section>
-			<p id="round">Frage: 3 / 10</p>
+			<p id="round">Frage: {game.getHumanPlayer.getAnsweredQuestions.size()+game.getMarvinPlayer.getAnsweredQuestions.size()} / 10</p>
 		</section>
 
 		<!-- Question -->

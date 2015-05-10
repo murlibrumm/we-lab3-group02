@@ -112,29 +112,15 @@ public class Application extends Controller {
 		EntityManager em = JPA.em();
 
 		JeopardyGame game;
-		HashMap<Integer, Question> idToQuestion;
-		List<Question> openQuestions;
 		if(Cache.get(session().get("user")+"game") != null){
 			game = (JeopardyGame) Cache.get(session().get("user")+"game");
-			idToQuestion = (HashMap) Cache.get(session().get("idToQuestion"));
-			openQuestions = (List) Cache.get(session().get("openQuestions"));
 		} else {
 			// Create Game with Username from Session
-			idToQuestion = new HashMap<>();
-			openQuestions = new ArrayList<>();
 			game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
+
 			// Store in Cache
 			Cache.set(session().get("user") + "game", game);
-			Cache.set("idToQuestion", idToQuestion);
-			Cache.set("openQuestions", openQuestions);
 		}
-
-    	List<Category> categories = game.getCategories();
-		for(Category category : categories)
-			for(Question question : category.getQuestions()) {
-				idToQuestion.put(question.getId(), question);
-				openQuestions.add(question);
-			}
 
     	//answerHumanQuestion(List<Integer> answerIds);
     	//JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
