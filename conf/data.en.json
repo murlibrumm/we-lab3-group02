@@ -189,7 +189,7 @@
         }
       ]
     },
-    { "name": "Semi-sructured Data",
+    { "name": "Semi-structured Data",
       "questions": [
         { "id": 15,
           "text": "XML",

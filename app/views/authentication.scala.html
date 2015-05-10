@@ -29,14 +29,8 @@
 
 
 	<!-- Content -->
-	<!--SPRACHAUSWAHL EVTL VERBESSERN -->
-	<!-- FIXME <h2 id="langheading" class="accessibility">@Messages.get("auth.language")</h2>
-	<a href="language?lang=de">de</a>
-	<a href="language?lang=en">en</a>
- -->
 
 	<div role="main">
-
 
 		<section id="login" aria-labelledby="loginheading">
 			<h2 id="loginheading" class="accessibility">@Messages.get("auth.login")</h2>
@@ -59,6 +53,10 @@
 
 				</fieldset>
 			}
+			
+			<h2 id="langheading" class="accessibility">@Messages.get("auth.language")</h2>
+			<a href="language?lang=de"><img src='@routes.Assets.at("images/de.png")' /></a>&nbsp; &nbsp; &nbsp;
+			<a href="language?lang=en"><img src='@routes.Assets.at("images/gb.png")' /></a>
 		</section>
 
 

@@ -1,8 +1,7 @@
-json.file=data.en.json
+json.file=data.de.json
 
 auth.body.jumpLogin=Zum Login springen
 auth.language=Sprachauswahl
-
 auth.loginArea=Anmeldung
 auth.name=Benutzername
 auth.password=Passwort
@@ -12,15 +11,12 @@ auth.notRegistered=Nicht registriert
 auth.clickHere=Hier klicken um dich zu registrieren
 auth.toTheRegistration=Zur Registrierung
 
-
 reg.title=Business Informatics Group Jeopardy! - Registrieren
-
 reg.jumpToAuth=Zur Registrierung springen
-
 reg.navigation.auth.Title=Klicke hier um dich anzumelden
 reg.navigation.auth.Text=Anmelden
-
 reg.register=Registrierung
+
 persData=Persoenliche Daten
 persData.firstName=Vorname:
 persData.lastName=Nachname:
@@ -35,7 +31,6 @@ playData.name=Benutzername:*
 playData.password=Passwort:*
 playData.submit=Registrieren
 playData.required=Mit "*" gekennzeichnete Felder sind Pflichtfelder
-
 
 general.clickLogout=Klicke hier um dich abzumelden
 general.logout=Abmelden
@@ -53,6 +48,8 @@ question.playerInfo=Spielerinformation
 question.leadingPlayer=Fuehrender Spieler
 question.secondPlayer=Zweiter Spieler
 question.timeLeft=Verbleibende Zeit:
+question.for=für €
+question.answer=antworten
 
 jeopardy.title=Business Informatics Group Jeopardy! - Fragenauswahl
 jeopardy.jumpToQuestionSelect=Zur Fragenauswahl springen
@@ -61,3 +58,11 @@ jeopardy.category=Kategorie:
 jeopardy.questionSubmit=waehlen
 jeopary.lastGameInfo=Info zum letztes Spiel
 jeopardy.lastGame=Letztes Spiel:
+jeopardy.questions=Fragen:
+jeopardy.playerCorrect=Du hast richtig geantwortet:
+jeopardy.playerFalse=Du hast falsch geantwortet: 
+jeopardy.computerCorrect=hat richtig geantwortet:
+jeopardy.computerFalse=hat falsch geantwortet:
+jeopardy.computerChoose1=hat
+jeopardy.computerChoose2=für €
+jeopardy.computerChoose3=gewählt

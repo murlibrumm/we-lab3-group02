@@ -7,16 +7,16 @@ GET         /                       controllers.Application.showLogin()
 GET         /authentication         controllers.Application.showLogin()
 POST        /authentication         controllers.Application.authenticate()
 
+GET         /language               controllers.Application.authenticationChangeLang(lang)
+
 GET         /registration           controllers.Application.showRegistration()
 POST        /registration           controllers.Application.registration()
 
-#GET        /jeopardy                   controllers.Application.startJeopardy()
 GET         /jeopardy               controllers.Application.showAllQuestions()
 
 POST        /showQuestion           controllers.Application.showQuestion()
 
 GET         /winner                 controllers.Application.showWinner()
-
 POST        /winner                 controllers.Application.startNewGame()
 
 # Map static resources from the /public folder to the /assets URL path

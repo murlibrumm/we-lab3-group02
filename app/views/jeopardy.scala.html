@@ -13,7 +13,8 @@
 		href='@routes.Assets.at("stylesheets/base.css")' />
 	<link rel="stylesheet" type="text/css"
 		href='@routes.Assets.at("stylesheets/screen.css")' />
-
+	<script src='@routes.Assets.at("javascripts/jquery.js")' type="text/javascript"></script>
+    <script src='@routes.Assets.at("javascripts/framework.js")' type="text/javascript"></script>
 </head>
 <body id="selection-page">
 	<a class="accessibility" href="#question-selection">@Messages.get("jeopardy.jumpToQuestionSelect")</a>
@@ -72,7 +73,8 @@
 					</tr>
 				</table>
 			</section>
-			<p id="round">Fragen: @{game.getHumanPlayer.getAnsweredQuestions.size()+game.getMarvinPlayer.getAnsweredQuestions.size()} / 10</p>
+			<p id="round">@Messages.get("jeopardy.questions")
+				@{game.getHumanPlayer.getAnsweredQuestions.size() + game.getMarvinPlayer.getAnsweredQuestions.size()} / 10</p>
 		</section>
 
 		<!-- Question -->
@@ -83,25 +85,28 @@
 
 			@if(game.getHumanPlayer.getLatestProfitChange != null) {
 				@if(game.getHumanPlayer.getLatestProfitChange != null && game.getHumanPlayer.getLatestProfitChange < 0) {
-					<p class="user-info negative-change">
-						Du hast falsch geantwortet: @game.getHumanPlayer.getLatestProfitChange €</p>
+					<p class="user-info negative-change">@Messages.get("jeopardy.playerFalse")
+						@game.getHumanPlayer.getLatestProfitChange €</p>
 				} else {
-					<p class="user-info positive-change">Du hast richtig geantwortet: @game.getHumanPlayer.getLatestProfitChange €</p>
+					<p class="user-info positive-change">@Messages.get("jeopardy.playerCorrect")
+						@game.getHumanPlayer.getLatestProfitChange €</p>
 				}
 			}
 
 			@if(game.getMarvinPlayer.getLatestProfitChange != null) {
 				@if(game.getMarvinPlayer.getLatestProfitChange != null && game.getMarvinPlayer.getLatestProfitChange < 0) {
 					<p class="user-info negative-change"> @game.getMarvinPlayer.getUser.getName
-						hat falsch geantwortet: @game.getMarvinPlayer.getLatestProfitChange €</p>
+						@Messages.get("jeopardy.computerFalse") @game.getMarvinPlayer.getLatestProfitChange €</p>
 				} else {
 					<p class="user-info positive-change"> @game.getMarvinPlayer.getUser.getName
-						hat richtig geantwortet: @game.getMarvinPlayer.getLatestProfitChange €</p>
+						@Messages.get("jeopardy.computerCorrect") @game.getMarvinPlayer.getLatestProfitChange €</p>
 				}
 			}
 
 			@if(game.getMarvinPlayer.getChosenQuestion != null) {
-				<p class="user-info">@game.getMarvinPlayer.getUser.getName hat @game.getMarvinPlayer.getChosenQuestion.getCategory.getName für € @game.getMarvinPlayer.getChosenQuestion.getValue gewählt.</p>
+				<p class="user-info">@game.getMarvinPlayer.getUser.getName @Messages.get("jeopardy.computerChoose1")
+					@game.getMarvinPlayer.getChosenQuestion.getCategory.getName @Messages.get("jeopardy.computerChoose2")
+					@game.getMarvinPlayer.getChosenQuestion.getValue @Messages.get("jeopardy.computerChoose3")</p>
 			}
 			@helper.form(action = routes.Application.showQuestion()) {
 				<fieldset>
@@ -146,20 +151,20 @@
 
 		// initialize time
 		$(document).ready(
-				function() {
-					// set last game
-					if (supportsLocalStorage()) {
-						var lastGameMillis = parseInt(localStorage['lastGame'])
-						if (!isNaN(parseInt(localStorage['lastGame']))) {
-							var lastGame = new Date(lastGameMillis);
-							$("#lastgame p").replaceWith(
-									'<p>Letztes Spiel: <time datetime="'
-											+ lastGame.toUTCString() + '">'
-											+ lastGame.toLocaleString()
-											+ '</time></p>')
-						}
+			function() {
+				// set last game
+				if (supportsLocalStorage()) {
+					var lastGameMillis = parseInt(localStorage['lastGame'])
+					if (!isNaN(parseInt(localStorage['lastGame']))) {
+						var lastGame = new Date(lastGameMillis);
+						$("#lastgame p").replaceWith(
+								'<p>Letztes Spiel: <time datetime="'
+										+ lastGame.toUTCString() + '">'
+										+ lastGame.toLocaleString()
+										+ '</time></p>')
 					}
-				});
+				}
+			});
 		//]]>
 	</script>
 </body>

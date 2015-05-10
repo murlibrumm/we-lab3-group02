@@ -26,6 +26,11 @@ import play.i18n.Messages;
 import views.html.*;
 
 public class Application extends Controller {
+	
+	public static Result authenticationChangeLang(String lang) {
+        changeLang(lang);
+        return showLogin();
+    }
 
     public static Result showLogin() {
     	return ok(authentication.render(Form.form(User.class)));
@@ -113,24 +118,29 @@ public class Application extends Controller {
 		EntityManager em = JPA.em();
 
 		JeopardyGame game;
-		if(Cache.get(session().get("user")+"game") != null){
-			game = (JeopardyGame) Cache.get(session().get("user")+"game");
-			if(game.getHumanPlayer().getAnsweredQuestions().size() + game.getMarvinPlayer().getAnsweredQuestions().size() >= 10){
+		if(Cache.get(session().get("user") + "game") != null){
+			game = (JeopardyGame) Cache.get(session().get("user") + "game");
+			/*if(game.getHumanPlayer().getAnsweredQuestions().size() + 
+					game.getMarvinPlayer().getAnsweredQuestions().size() >= 10){
 				return redirect(routes.Application.showWinner());
-			}
+			}*/
 			DynamicForm dynamicForm = Form.form().bindFromRequest();
-			List<Integer> selectedA = dynamicForm.data().keySet().stream().filter(s -> s.startsWith("selection")).map(s -> Integer.valueOf(dynamicForm.get(s))).collect(Collectors.toList());
+			List<Integer> selectedA = dynamicForm.data().keySet().stream().filter
+					(s -> s.startsWith("selection")).map
+					(s -> Integer.valueOf(dynamicForm.get(s))).collect(Collectors.toList());
 			if (selectedA.isEmpty()) {
 				return ok(jeopardy.render(game));
-			} else { game.answerHumanQuestion(selectedA); }
-
+			} else { 
+				game.answerHumanQuestion(selectedA);
+			}
 
 			if(!game.isGameOver()){
-					return ok(jeopardy.render(game));
+				return ok(jeopardy.render(game));
 			} else {
 				return redirect(routes.Application.showWinner());
 			}
 		} else {
+			// neues Spiel
 			// Create Game with Username from Session
 			game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
 
@@ -138,16 +148,7 @@ public class Application extends Controller {
 			Cache.set(session().get("user") + "game", game);
 			return ok(jeopardy.render(game));
 		}
-
-    	//answerHumanQuestion(List<Integer> answerIds);
-    	//JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
-		//game.startNewRound();
-		//return ok(jeopardy.render());
     }
-    
-    /*public static Result checkQuestionAnswer() {
-    	return ok(index.render("DUMMY checkAnswer"));
-    }*/
 
     public static Result showQuestion() {
     	JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
@@ -156,15 +157,13 @@ public class Application extends Controller {
 		if(dynamicForm.get("question_selection") != null) {
 			int selected = Integer.valueOf(dynamicForm.get("question_selection"));
 			game.chooseHumanQuestion(selected);
-
-			return ok(question.render(game));
-		} else {
-			return ok(jeopardy.render(game));
 		}
+		return ok(question.render(game));
     }
 
     public static Result showWinner() {
 		JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
+		Cache.remove(session().get("user") + "game");
 		return ok(winner.render(game));
     }
 
