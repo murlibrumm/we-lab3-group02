@@ -3,6 +3,7 @@ package controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -114,19 +115,28 @@ public class Application extends Controller {
 		JeopardyGame game;
 		if(Cache.get(session().get("user")+"game") != null){
 			game = (JeopardyGame) Cache.get(session().get("user")+"game");
+			if(!game.isGameOver()){
+				DynamicForm dynamicForm = Form.form().bindFromRequest();
+				List<Integer> selectedA = dynamicForm.data().keySet().stream().filter(s -> s.startsWith("selection")).map(s -> Integer.valueOf(dynamicForm.get(s))).collect(Collectors.toList());
+				game.answerHumanQuestion(selectedA);
+				return ok(jeopardy.render(game));
+			} else {
+				return redirect(routes.Application.showWinner());
+			}
 		} else {
 			// Create Game with Username from Session
 			game = new SimpleJeopardyGame(factory, em.find(User.class, session().get("user")));
 
+
 			// Store in Cache
 			Cache.set(session().get("user") + "game", game);
+			return ok(jeopardy.render(game));
 		}
 
     	//answerHumanQuestion(List<Integer> answerIds);
     	//JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
 		//game.startNewRound();
 		//return ok(jeopardy.render());
-    	return ok(jeopardy.render(game));
     }
     
     /*public static Result checkQuestionAnswer() {
@@ -144,7 +154,19 @@ public class Application extends Controller {
     }
 
     public static Result showWinner() {
-    	return ok(index.render("DUMMY showWinner"));
+		JeopardyGame game = (JeopardyGame) Cache.get(session().get("user") + "game");
+		return ok(winner.render(game));
     }
+
+	@Transactional
+	public static Result startNewGame(){
+		JeopardyFactory factory = new PlayJeopardyFactory(Messages.get("json.file"));
+		EntityManager em = JPA.em();
+
+		JeopardyGame game = null;
+		Cache.set(session().get("user") + "game", game);
+
+		return redirect(routes.Application.showAllQuestions());
+	}
 
 }

@@ -79,11 +79,12 @@
 		<section id="newgame" aria-labelledby="newgameheading">
 			<h2 id="newgameheading" class="accessibility">@Messages.get("winner.newGame")</h2>
 			<!-- FIXME FORM ÄNDERN-->
-			<form action="jeopardy.xhtml" method="post">
+			@helper.form(action = routes.Application.startNewGame()) {
 				<input class="clickable orangelink contentlink" id="new_game"
-					type="submit" name="restart"
-					value='@Messages.get("winner.newGame")' />
-			</form>
+				type="submit" name="restart"
+				value='@Messages.get("winner.newGame")' />
+			}
+
 		</section>
 	</div>
 	<!-- footer -->

@@ -80,22 +80,23 @@
 		<!-- Question -->
 		<!-- FIXME Messages fehlen -->
 		<section id="question" aria-labelledby="questionheading">
-			<form id="questionform" action="jeopardy.xhtml" method="get">
+			@helper.form(action = routes.Application.showAllQuestions()) {
 
 				<h2 id="questionheading" class="accessibility">Frage</h2>
-				<p id="questiontype">@game.getHumanPlayer.getChosenQuestion.getCategory.getName für € @game.getHumanPlayer.getChosenQuestion.getValue</p>
+				<p id="questiontype">@game.getHumanPlayer.getChosenQuestion.getCategory.getName
+					für € @game.getHumanPlayer.getChosenQuestion.getValue</p>
 				<p id="questiontext">@game.getHumanPlayer.getChosenQuestion.getText</p>
 				<ul id="answers">
 
-					@for(answer <- game.getHumanPlayer.getChosenQuestion.getAllAnswers){
-						<li><input name="answers:@answer.getId" id="answer_@answer.getId" value="@answer.getId" type="checkbox"/><label class="tile clickable" for="answer_@answer.getId">@answer.getText()</label></li>
-					}
+				@for(answer <- game.getHumanPlayer.getChosenQuestion.getAllAnswers) {
+					<li><input name="selection_@answer.getId" id="answer_@answer.getId" value="@answer.getId" type="checkbox"/> <label class="tile clickable" for="answer_@answer.getId">@answer.getText()</label></li>
+				}
 
 				</ul>
 				<input id="timeleftvalue" type="hidden" value="100" /> <input
-					class="greenlink formlink clickable" name="answer_submit" id="next"
-					type="submit" value="antworten" accesskey="s" />
-			</form>
+				class="greenlink formlink clickable" name="answer_submit" id="next"
+				type="submit" value="antworten" accesskey="s" />
+			}
 		</section>
 
 		<section id="timer" aria-labelledby="timerheading">
